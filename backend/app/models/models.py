@@ -119,7 +119,7 @@ class ProvenanceRecord(Base):
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     action = Column(String, nullable=False)  # created, transferred, processed, etc.
     description = Column(Text)
-    metadata = Column(Text)  # JSON for additional data
+    record_metadata = Column(Text)  # JSON for additional data
     timestamp = Column(DateTime(timezone=True), server_default=func.now())
     
     # Relationships

@@ -4,9 +4,7 @@ from app.core.config import settings
 from app.api.v1.api import api_router
 from app.db.base import Base, engine
 from app.utils.cache import cache
-
-# Create tables
-Base.metadata.create_all(bind=engine)
+import os
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -27,6 +25,13 @@ app.add_middleware(
 @app.on_event("startup")
 async def startup_event():
     """Initialize services on startup"""
+    # Create tables if database is available
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        print(f"Warning: Could not create database tables: {e}")
+    
+    # Initialize cache
     cache.connect()
 
 

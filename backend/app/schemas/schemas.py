@@ -123,7 +123,7 @@ class ProvenanceRecordCreate(BaseModel):
     listing_id: int
     action: str
     description: Optional[str] = None
-    metadata: Optional[str] = None
+    record_metadata: Optional[str] = None
 
 
 class ProvenanceRecord(ProvenanceRecordCreate):
